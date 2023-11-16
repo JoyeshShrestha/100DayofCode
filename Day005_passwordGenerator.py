@@ -1,0 +1,50 @@
+import random
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+
+print("Welcome to the PyPassword Generator!")
+nr_letters= int(input("How many letters would you like in your password?\n")) 
+nr_symbols = int(input(f"How many symbols would you like?\n"))
+nr_numbers = int(input(f"How many numbers would you like?\n"))
+total = nr_letters+nr_numbers+nr_symbols
+# print(total)
+password = ""
+count_l = count_s = count_n = 0
+for i in range(0,total):
+    if count_s >= nr_symbols:
+        what = random.randint(1,2)
+    else:    
+        what = random.randint(1,3)
+
+    #letters
+    # print(what)
+    if count_l ==nr_letters:
+        what = 2    
+
+    if what == 1 and count_l<nr_letters:
+        
+        password += letters[random.randint(0,len(letters)-1)]
+        
+        count_l+=1
+
+    
+
+    #numbers
+    if count_n == nr_numbers:
+        what = 3
+    
+    if what == 2 and count_n <nr_numbers:
+        password += numbers[random.randint(0,len(numbers)-1)]
+        count_n +=1
+    
+            
+
+    #symbols
+    if what == 3 and count_s <nr_symbols :
+        password += symbols[random.randint(0,len(symbols)-1)]
+        count_s +=1
+     
+
+print("Newly generated password:")
+print(password)
