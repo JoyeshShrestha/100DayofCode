@@ -13,13 +13,16 @@ password = ""
 count_l = count_s = count_n = 0
 for i in range(0,total):
     if count_s >= nr_symbols:
-        what = random.randint(1,2)
+        if count_l>= nr_letters:
+            what = 2
+        else:    
+            what = 1
     else:    
         what = random.randint(1,3)
 
     #letters
     # print(what)
-    if count_l ==nr_letters:
+    if count_l == nr_letters:
         what = 2    
 
     if what == 1 and count_l<nr_letters:
