@@ -12,11 +12,14 @@ while n == 0:
         for letter in text:
             if letter in alphabet:
                 n_letter = alphabet.index(letter) + shift
-                while n_letter>26:
+                while n_letter>=26:
                     n_letter = n_letter-26
+                print("this",n_letter)    
                 encoded_word += alphabet[n_letter]
+                
             else:
-                encoded_word +=letter    
+                encoded_word +=letter
+            print (encoded_word)            
         return encoded_word,shift
     def decode(text,shift):
         decoded_word =""
@@ -24,11 +27,13 @@ while n == 0:
             if letter in alphabet:
                 
                 n_letter = alphabet.index(letter) - shift
-                while n_letter <= 0:
+                while n_letter < 0:
                     n_letter = n_letter+26
+                print("this",n_letter) 
                 decoded_word += alphabet[n_letter]
             else:
                 decoded_word +=letter  
+            print (decoded_word)            
 
         return decoded_word     
 
