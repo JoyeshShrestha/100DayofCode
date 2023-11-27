@@ -1,5 +1,5 @@
 import colorgram
-colors = colorgram.extract('C:\\Users\\lenovo\\Documents\\pawandai\\100daysofpython\\Day018\\spot painting\\image.jpg', 6)
+colors = colorgram.extract('C:\\Users\\lenovo\\Documents\\pawandai\\100daysofpython\\Day018\\spot painting\\ohchampa.png', 6)
 from turtle import Turtle, Screen, colormode
 import turtle 
 from random import randint
