@@ -40,12 +40,12 @@ def compare_followers(followers1,followers2):
 
 
 proceed = True
-num1 = random.randint(0,length)
+num1 = random.randint(0,length-1)
 
 # main program starts
 while proceed:
-    num2 = random.randint(0,length)
-    num2 = no_similarities(num1,num2,previous_num)
+    num2 = random.randint(0,length-1)
+    # num2 = no_similarities(num1,num2,previous_num)
     print(logo)
     print(f"Compare A: {data[num1]['name']}, {data[num1]['description']}, from {data[num1]['country']}  ")
 
@@ -60,7 +60,8 @@ while proceed:
     result = compare_followers(data[num1]['follower_count'],data[num2]['follower_count'])
 
     if answer !=result:
-        clear_console()
+        # clear_console(
+        print("+++++++++++++++++++++++++++++++++++++++++++++++++++++")
         print(f"Sorry, that's wrong. Final score:{score}")
         break
     elif answer == result:
