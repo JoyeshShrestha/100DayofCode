@@ -27,12 +27,21 @@ def gone():
 def clearScreen():
       johnny.clear()
       gone()
+
+def upen():
+      johnny.penup()
+
+def dpen():
+      johnny.pendown()      
 screen.listen()
 screen.onkey(key="w", fun= move_forwards)
 screen.onkey(key="s",fun=backward)
 screen.onkey(key="a",fun=left)
 screen.onkey(key="d",fun=right)
 screen.onkey(key = "c", fun = clearScreen)
+screen.onkey(key="p",fun=upen)
+screen.onkey(key="o",fun=dpen)
+
 
 
 screen.exitonclick()

@@ -20,7 +20,7 @@ for color in colors:
 
 if user_bet:
     is_race_on = True
-
+winner = ""
 while is_race_on:
     for turtle in all_turtle:
         rand_distance = randint(0,7)
@@ -30,11 +30,13 @@ while is_race_on:
             winner = turtle.color()
             
             is_race_on = False
-
-if user_bet == winner[1].lower():
-    print(f"Congratulations! {user_bet} has won the race")
-else:
-    print(f"You lose! {winner[1]} has won the race")
+if winner == "":
+    print("You didnt bet")
+else:    
+    if user_bet == winner[1].lower():
+        print(f"Congratulations! {user_bet} has won the race")
+    else:
+        print(f"You lose! {winner[1]} has won the race")
 
 
 

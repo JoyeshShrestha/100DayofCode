@@ -11,10 +11,11 @@ def random_color():
 timmy = Turtle()
 timmy.shape("turtle")
 timmy.speed('fastest')
-n = int(360/2)
+a=2
+n = int(360/a)
 for i in range(n):
     timmy.circle(90)
-    timmy.right(2)
+    timmy.right(a)
     random_color()   
 
     
