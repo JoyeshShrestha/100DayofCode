@@ -17,3 +17,5 @@ class Food(Turtle):
         y = randint(-280,280)
 
         self.goto(x,y)
+
+        

@@ -33,9 +33,9 @@ while game_is_on:
         food.refresh()
 
     if snake.head.xcor() > 290 or snake.head.xcor()< -300 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
-        score.game_over()
-        
-        game_is_on = False
+        score.reset()
+        snake.reset()
+        # game_is_on = False
 
     #Detect collision with tail
 
@@ -43,9 +43,10 @@ while game_is_on:
         
         
         if snake.head.distance(segment) < 10:
-            game_is_on = False
-            score.game_over()
-
+            # game_is_on = False
+            # score.game_over()
+            score.reset()
+            snake.reset()
     # while game_is_on:
         
 
