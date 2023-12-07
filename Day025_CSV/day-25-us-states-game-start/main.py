@@ -31,7 +31,8 @@ while len(guessed_state)<50:
         for state in all_states:
             if state not in guessed_state:
                 missing_state.append(state)
-
+        new_data = pandas.DataFrame(missing_state)
+        new_data.to_csv("C:\\Users\\lenovo\\Documents\\pawandai\\100daysofpython\\Day025_CSV\\day-25-us-states-game-start\\states_to_learn.csv")
         print(missing_state)    
         break
     if answer_state in all_states:
