@@ -2,6 +2,24 @@ from tkinter import *
 from tkinter import messagebox
 from pwGen import Password
 import pyperclip
+import json
+
+
+def find_password():
+    try:
+        with open("C:\\Users\\lenovo\\Documents\\pawandai\\100daysofpython\\Day29-Password_Gen_GUI\\data.json","r") as file_data:
+            data = json.load(file_data)
+            website=website_entry.get()
+            if website in data:
+                email = data[website]["email"]    
+                pw = data[website]["password"]
+                messagebox.showinfo(title=website, message=f"Email: {email}\n Password: {pw}") 
+
+            else:
+                messagebox.showinfo(title=website, message=f"NO data for {website}")
+    except FileNotFoundError:
+                messagebox.showinfo(title="Error", message=f"NO file found")
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 password_gen = Password()
 
@@ -18,7 +36,12 @@ def save_password():
     website = website_entry.get()
     email = email_entry.get()
     password = password_entry.get()
-
+    new_data = {
+         website:{
+              "email":email,
+              "password":password,
+         }
+    }
     if len(website)==0 or len(email)==0 or len(password)==0:
            messagebox.showinfo(title="Error", message="Empty boxes!")    
     else:
@@ -27,10 +50,20 @@ def save_password():
     
 
 
-        if is_ok:
-            with open("C:\\Users\\lenovo\\Documents\\pawandai\\100daysofpython\\Day29-Password_Gen_GUI\\data.txt","a") as file:
-                file.write(f"{website} | {email} | {password}\n")
-    
+        if is_ok: 
+            try:
+                with open("C:\\Users\\lenovo\\Documents\\pawandai\\100daysofpython\\Day29-Password_Gen_GUI\\data.json","r") as data_file:
+                    data=json.load(data_file)
+                    
+                    data.update(new_data)
+                    
+                with open("C:\\Users\\lenovo\\Documents\\pawandai\\100daysofpython\\Day29-Password_Gen_GUI\\data.json","w") as data_file:
+
+                    json.dump(data,data_file, indent=4)
+            except FileNotFoundError:
+                with open("C:\\Users\\lenovo\\Documents\\pawandai\\100daysofpython\\Day29-Password_Gen_GUI\\data.json","w") as data_file:
+                    json.dump(new_data,data_file, indent=4)
+                 
             clear_all()     
 
 
@@ -53,12 +86,18 @@ canvas.grid(column=2,row=2)
 website_label = Label(padx=5 , pady=5,text="Website:", bg="white")
 website_label.grid(column=1,row=3)
 
-website_entry = Entry(width=35)
-website_entry.grid(column=2,row=3,columnspan=2)
+website_entry = Entry(width=21)
+website_entry.grid(column=2,row=3)
 website_entry.focus()
+
+
+search = Button(text="Search",font=("Arial",6),width=35-21,command=find_password)
+search.grid(column=3,row=3)
 
 email_label = Label(padx=5 , pady=5, text="Email/Username:", bg="white")
 email_label.grid(column=1,row=4)
+
+
 
 email_entry = Entry(width=35)
 email_entry.grid(column=2,row=4,columnspan=2)

@@ -9,14 +9,21 @@ code_dict = {row.letter:row.code for(index,row) in data.iterrows()}
 
 # print(code_dict)
 
+def here():
+    user_input = input().upper()
 
-user_input = input().upper()
+    user_word_list=[letter for letter in user_input]
 
-user_word_list=[letter for letter in user_input]
+    try:
+        user_code_list = [code_dict[letter] for letter in user_word_list]
+    except KeyError:
+        print("Sorry only letters from alphabet please")
+        here()
+    else:    
+        print(user_code_list)
 
-user_code_list = [code_dict[letter] for letter in user_word_list]
-
-print(user_code_list)
+    
+here()
 
 
 
