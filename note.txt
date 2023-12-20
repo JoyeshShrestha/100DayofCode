@@ -1,0 +1,8 @@
+event driven architecture,
+	monolithic
+	scalable
+
+AWS , Azure, GCP ko kam
+	containerrize --> docker image--> ekaichoti 	1000 
+docker
+	containerising
