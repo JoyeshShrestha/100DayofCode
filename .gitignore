@@ -1,0 +1,3 @@
+./Day035/.env
+*.log
+temp/
