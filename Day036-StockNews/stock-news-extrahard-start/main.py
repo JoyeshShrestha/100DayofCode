@@ -24,8 +24,11 @@ response.raise_for_status()
 stock_data = response.json()
 
 data = stock_data
+print(data)
 data_list = [value for (key,value) in data.items()]
+
 yesterday_data = data_list[0]
+
 yesterday_closing_price = float(yesterday_data["4. close"])
 
 day_before_yesterday_data = data_list[1]
