@@ -1,10 +1,14 @@
 import requests
 from twilio.rest import Client
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 account_sid = "AC3aa4f88b8d618ba059571ae8cefa7e6a"
 auth_token = "15599d53c838666392b79bdaecf09c5d"
-API_KEY = "2d7b96792fae3a3fae5989bc4d585b12"
+API_KEY = os.environ["API_KEY"]
 MY_LAT = 27.717245
 MY_LONG = 85.323959
 
@@ -25,7 +29,7 @@ weather_data = response.json()
 id = weather_data['weather'][0]['id']
 
 code = "6X5LQS4AS55F96E57LE6FTCQ"
-
+print("oko")
 will_rain = False
 if id <=700:
     will_rain = True
