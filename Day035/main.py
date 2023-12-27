@@ -1,6 +1,6 @@
 import requests
 from twilio.rest import Client
-
+import os
 
 account_sid = "AC3aa4f88b8d618ba059571ae8cefa7e6a"
 auth_token = "15599d53c838666392b79bdaecf09c5d"
@@ -24,7 +24,7 @@ weather_data = response.json()
 
 id = weather_data['weather'][0]['id']
 
-code = "6X5LQS4AS55F96E57LE6FTCQ"
+code = os.environ["API_TWILLIO"]
 
 will_rain = False
 if id <=700:

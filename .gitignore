@@ -1,4 +1,3 @@
-.\Day036-StockNews\stock-news-extrahard-start\.env
-.\Day035\.env
+.env
 *.log
 temp/
