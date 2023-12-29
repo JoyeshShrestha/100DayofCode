@@ -1,9 +1,11 @@
 import smtplib
 import datetime as dt
 import pandas
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 import random
-password = "lfkh itfp sqdi xgdc" 
+password = os.environ["email_password"] 
 
 
 
