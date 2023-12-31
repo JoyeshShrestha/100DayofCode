@@ -8,9 +8,10 @@ class FlightData(FlightSearch):
 
     def improve_data(self,lower_prices):
         cleaned_data = []
-        cleaned_data_dict={}
         
         for info in lower_prices:
+            cleaned_data_dict={}
+
             cleaned_data_dict["countryTo"] = info["cityTo"]
             cleaned_data_dict["price"] = info["price"]
             cleaned_data_dict["availability"]=info["availability"]

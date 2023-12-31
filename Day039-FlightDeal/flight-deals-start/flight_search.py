@@ -25,6 +25,7 @@ class FlightSearch:
         
         # list_I.append("/".join(list_IATA))
         # print("------------",list_I)
+        lower_prices = []
         cities = {}
         for key,value in list_IATA.items():
             query = {
@@ -42,7 +43,6 @@ class FlightSearch:
             flight_data =kiwi_responses.json()
             already_city_list = [ ]
             
-            lower_prices = []
             for flights in flight_data["data"]:
                 
 
@@ -55,7 +55,7 @@ class FlightSearch:
                 
                 already_city_list.append(city)
                 price = flights["price"]
-                print(f"{city}.....{price}")
+                print(f"{city}.....{price}.....v{value}")
 
                 if price<value:
                     lower_prices.append(flights)
