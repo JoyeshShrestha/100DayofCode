@@ -57,7 +57,7 @@ class FlightSearch:
                 price = flights["price"]
                 print(f"{city}.....{price}.....v{value}")
 
-                if price<value:
+                if price < value:
                     lower_prices.append(flights)
                     self.is_lower = True
 

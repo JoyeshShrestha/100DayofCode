@@ -1,7 +1,9 @@
 
+from day40 import Day40
 from flight_data import FlightData
 import smtplib
 import os
+import requests
 from dotenv import load_dotenv
 load_dotenv()
 password = os.environ["email_password"]
@@ -16,6 +18,7 @@ class NotificationManager:
         print("hjello")
 
 
+    
 
     def send_email(self):
         data = FlightData(self.lower_prices)
@@ -25,20 +28,26 @@ class NotificationManager:
                
             country = i["countryTo"]
             price = i["price"]
-            available = i["availability"]
+            available = i["availability"]["seats"]
             print("-------------",country)
-            try:
-                connection =smtplib.SMTP("smtp.gmail.com", port=587)
-                
-                connection.starttls()
-                connection.login(user=my_email,password=password)
-                connection.sendmail(
-                    from_addr = my_email, 
-                    to_addrs=my_email, 
-                    msg=f"Subject: {country} has low prices\n\nGreeting\nThere are {available} seats for the price of Rs.{price} from KTM to {country}. Have a great one\nRegards, JO")
-                connection.close()
-                
-            except:
-                print("Email error! not sent")    
-            else:
-                print("Email sent successfully") 
+            information = Day40()
+            info = information.info
+            for i in info['users']:
+                l_name = i["lastName"]
+                f_name = i["firstName"]
+                e_mail = i["email"]
+                try:
+                    connection =smtplib.SMTP("smtp.gmail.com", port=587)
+                    
+                    connection.starttls()
+                    connection.login(user=my_email,password=password)
+                    connection.sendmail(
+                        from_addr = my_email, 
+                        to_addrs=e_mail, 
+                        msg=f"Subject: {country} has low prices\n\nGreeting {l_name}\nThere are {available} seats for the price of Rs.{price} from KTM to {country}. Have a great one\n\nRegards, JO")
+                    connection.close()
+                    
+                except:
+                    print("Email error! not sent ", e_mail)    
+                else:
+                    print("Email sent successfully", e_mail) 
