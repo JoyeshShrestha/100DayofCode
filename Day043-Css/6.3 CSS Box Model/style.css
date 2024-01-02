@@ -1,0 +1,25 @@
+.boxes{
+    height: 200px;
+    width: 200px;
+    margin: 0;
+}
+
+p{
+    margin: 0;
+}
+#first{
+    padding: 20px;
+    border: 10px black solid;
+
+}
+
+#second{
+    margin-left: 260px;
+    border: 20px black solid;
+    border-width: 20px 10px;
+}
+
+#third{
+    border: 10px black solid;
+    margin-left: 40px;
+}
