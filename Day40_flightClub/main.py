@@ -21,6 +21,6 @@ for i in info["users"]:
                 connection.login(user=my_email,password=password)
                 connection.sendmail(
                     from_addr = my_email, 
-                    to_addrs=i[email], 
+                    to_addrs=i['email'], 
                     msg=f"Subject: {country} has low prices\n\nGreeting\nThere are {available} seats for the price of Rs.{price} from KTM to {country}. Have a great one\nRegards, JO")
                 connection.close()
