@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import spotipy
+
 from spotipy.oauth2 import SpotifyOAuth
 import os
 from dotenv import load_dotenv
@@ -36,7 +37,7 @@ user_id = sp.current_user()["id"]
 # sp.user_playlist_create(user=os.environ["SPOTIFY_ID"], name=f"{date} Top 100 Songs", public=True, collaborative=False, description=f"This playlist is created by python bot for the date of {date}")
 # user_id = sp.current_user()["id"]
 url = f"https://api.spotify.com/v1/me/"
-parameter = {"access_token": "BQBKpU-jHl26g9j_1sLlR5HJ4WdBc6JDGVz_twg8rKLe3Lv5BR8Q6xaGku_vtdpGdWOGKYGgkCI_unslQlMhypOSQaznPGoUpCXy0fyFGSRas_fg9gEceWz-wvUS9ttFd_owlwzkfm_Hb7RyGIJBciJssqzlsiCT_h6w6QEaT0crKKrIh6XpkXcfzEJ4puUx70b1mpkwFTA18i2IPWuZd2keDmVOrEQeag", "token_type": "Bearer", "expires_in": 3600, "refresh_token": "AQAyfQ3nSeSAuqUl0ISks8U1N9u3K7vlvefKwG2pWYNLt1TfK8z1pMB-OOtKpXcVEjlsyw_wR77474LLEsZs1mzhPexcGwGRrUkTX3hj1CGBPdiWWK3AmgGTi4769iTXFaY", "scope": "playlist-modify-private", "expires_at": 1704283458}
+parameter = os.environ["Spotify_params"]
 spotify_response = requests.get(url=url,params=parameter)
 
 data=spotify_response.json()
