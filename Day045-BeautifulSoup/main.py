@@ -15,7 +15,7 @@ print(heading.getText())
 section_heading = soup.find(name="h3", class_="heading")
 
 
-company_url = soup.select_one(selector="#name")
+company_url = soup.select_one(selector="#name ")
 
 print(company_url)
 
