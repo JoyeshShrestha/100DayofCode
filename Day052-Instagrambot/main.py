@@ -47,21 +47,32 @@ class InstagramBot:
         click_followers = self.driver.find_element(By.CSS_SELECTOR,value= 'ul li:nth-child(2) a')
         click_followers.click()
         time.sleep(2)
-        follower_list = self.driver.find_elements(By.CSS_SELECTOR,value="._aano button")
-        time.sleep(2)
-        print(follower_list)
-        print(len(follower_list))
-
         
-        for follower in follower_list:
-            time.sleep(3)
-            print("start ")
-            try:                
-                follower.click()
-            except(ElementClickInterceptedException):
+        time.sleep(2)
+        # print(follower_list)
+        # print(len(follower_list))
+
+        loop=True
+        i=1
+        while loop:
+                time.sleep(3)
+                
+                follower= self.driver.find_element(By.CSS_SELECTOR,value=f"._aano div:nth-child({i}) button")
+                time.sleep(3)
+                print("start ",i)
+                i+=1
+
+                try:                
+
+                    follower.click()
+                except(ElementClickInterceptedException):
                         cancel_button = self.driver.find_element(by=By.XPATH, value="//button[contains(text(), 'Cancel')]")
                         cancel_button.click()
-            
+                except(NoSuchElementException):
+                    print("completed")
+                    loop=False
+
+                
             
 
             
