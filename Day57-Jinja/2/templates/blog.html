@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="static/main.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog</title>
+  </head>
+  <body>
+    <h1>My Blog</h1>
+    {%for blog_post in posts: %}
+    <div class="blog">
+      <h2>{{blog_post["title"]}}</h2>
+      <h3>{{blog_post["subtitle"]}}</h3>
+      <a href=>Click here to learn more</a>
+    </div>
+
+    {% endfor%}
+  </body>
+</html>
