@@ -14,32 +14,6 @@ blog_url = "https://api.npoint.io/56f9faa524d052769284"
 response = requests.get(blog_url)
 blog = response.json()
 
-@app.route('/')
-def get_blog():
-    print(blog)
-    return render_template('index.html',blog_list = blog)
-
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
-@app.route('/posts/<id>')
-def get_post(id):
-    return render_template('post.html',blog_post = blog[int(id) -1])
-
-
-    
-
-
-
-
-
-
 
 def send_email(name,email,phone,message):
         try:
@@ -56,18 +30,59 @@ def send_email(name,email,phone,message):
         except:
             return False  
         else:
-            return True   
+            return True 
+        
+        
+@app.route('/')
+def get_blog():
+    print(blog)
+    return render_template('index.html',blog_list = blog)
 
-@app.route('/contact/success',methods = ["POST"])
-def recieve_data():
-    name = request.form['name']
-    email = request.form['email']
-    phone = request.form['phone']
-    message = request.form['message']
-    if send_email(name,email,phone,message):
-        return f"Successfully sent"
-    else:
-        return f"Error while sending email"
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact',methods = ["GET","POST"])
+def contact():
+    if request.method == "GET":
+
+        return render_template('contact.html')
+    elif request.method=="POST":
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+        message = request.form['message']
+        if send_email(name,email,phone,message):
+            return f"Successfully sent"
+        else:
+            return f"Error while sending email"
+
+@app.route('/posts/<id>')
+def get_post(id):
+    return render_template('post.html',blog_post = blog[int(id) -1])
+
+
+    
+
+
+
+
+
+
+
+  
+
+# @app.route('/contact/success',methods = ["POST"])
+# def recieve_data():
+#     name = request.form['name']
+#     email = request.form['email']
+#     phone = request.form['phone']
+#     message = request.form['message']
+#     if send_email(name,email,phone,message):
+#         return f"Successfully sent"
+#     else:
+#         return f"Error while sending email"
 
 if __name__=="__main__":
     app.run(debug=True)
