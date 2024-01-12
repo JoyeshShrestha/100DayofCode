@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Revision</title>
+</head>
+<body>
+    <form action="{{ url_for('receive_data')}}" method="post">
+        <label for="">Name:</label>
+        <input type="text" name="name" id="">
+        <label for="">Password:</label>
+        <input type="text" name="password">
+        <button type="submit">submit</button>
+    </form>
+</body>
+</html>
