@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% from 'bootstrap4/form.html' import render_form %}
 
 <html>
   <head>
@@ -8,10 +9,7 @@
     <div class="container">
       <h1>Login</h1>
       <!-- This is where our form will go. -->
-      <form method="POST" action="/">
-        {{ form.csrf_token }} {{ form.name.label }} {{ form.name(size=20) }}
-        <input type="submit" value="Go" />
-      </form>
+      {{ render_form(form) }}
     </div>
   </body>
 </html>
