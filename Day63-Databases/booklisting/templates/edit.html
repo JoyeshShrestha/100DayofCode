@@ -8,6 +8,7 @@
     Book Name: {{title}} <br />
     Author: {{author}} <br />
     Current Rating: {{rating}}<br />
+    <form action="{{url_for('edit',id =id)}}" method="POST">
     <input name="newrating" /><button type="submit">Change Rating</button>
 
     <a href="{{url_for('add')}}">Add New Book</a>

@@ -31,7 +31,9 @@ with app.app_context():
 
 @app.route('/')
 def home():
-    
+    with app.app_context():
+        result = db.session.execute(db.select(Book).order_by(Book.title))
+        all_books = result.scalars().all() 
     return render_template('index.html',books = all_books)
 
 
@@ -68,13 +70,30 @@ def edit(id):
             title = book.title
             rating = book.rating
             author = book.author
-        return render_template('edit.html',title=title,rating=rating,author=author)
+        return render_template('edit.html',title=title,rating=rating,author=author,id=id)
     elif request.method == "POST":
         with app.app_context():
+            new_rate = request.form['newrating']
             book_to_update = db.session.execute(db.select(Book).where(Book.id == id)).scalar()
         # or book_to_update = db.get_or_404(Book, book_id)  
-            book_to_update.title = "Harry Potter and the Goblet of Fire"
+            book_to_update.rating = new_rate
             db.session.commit()
+        return redirect(url_for('home'))
+@app.route("/delete/<id>")
+def delete(id):
+    
+        # all_books[id]
+        # book_p=all_books[int(id)-1]
+        # print(id)
+        # print("----",book_p["title"])
+        with app.app_context():
+            book_to_delete = db.session.execute(db.select(Book).where(Book.id == id)).scalar()
+    # or book_to_delete = db.get_or_404(Book, book_id)
+            db.session.delete(book_to_delete)
+            db.session.commit()  
+        return redirect(url_for('home'))   
+    
+         
 
 if __name__ == "__main__":
     app.run(debug=True)
