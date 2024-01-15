@@ -60,6 +60,7 @@ class Cafe(db.Model):
             # and the value is the value of the column
             dictionary[column.name] = getattr(self, column.name)
         return dictionary
+    
         
         #Method 2. Altenatively use Dictionary Comprehension to do the same thing.
         # return {column.name: getattr(self, column.name) for column in self.__table__.columns}
@@ -103,9 +104,47 @@ def get_random():
 # HTTP DELETE - Delete Record
 @app.route('/all')
 def get_all():
+    loc = request.method
     result = db.session.execute(db.select(Cafe))
     all_cafe = result.scalars().all()
     all_cafe_json = [cafe.to_dict() for cafe in all_cafe]
     return jsonify(cafe=all_cafe_json)
+
+
+
+@app.route('/search')
+def search():
+    location = request.args.get('loc')
+    
+    result = db.session.execute(db.select(Cafe).where(Cafe.location ==location))
+    data_list = result.scalars().all()
+    if data_list:   
+        display_list = [d.to_dict() for d in data_list]
+        return jsonify(cafe=display_list)
+    else:
+        return jsonify(error={
+            "Not Found":"Sorry, we dont have a cafe at that location."
+
+        })
+    
+@app.route('/add',methods=["POST"])
+def add_cafe():
+    new_cafe = Cafe(
+        name=request.form.get("name"),
+        map_url=request.form.get("map_url"),
+        img_url=request.form.get("img_url"),
+        location=request.form.get("loc"),
+        has_sockets=bool(request.form.get("sockets")),
+        has_toilet=bool(request.form.get("toilet")),
+        has_wifi=bool(request.form.get("wifi")),
+        can_take_calls=bool(request.form.get("calls")),
+        seats=request.form.get("seats"),
+        coffee_price=request.form.get("coffee_price"),
+    )
+    db.session.add(new_cafe)
+    db.session.commit()
+    return jsonify(response={"success": "Successfully added the new cafe."})
+
+
 if __name__ == '__main__':
     app.run(debug=True)
