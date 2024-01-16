@@ -42,15 +42,20 @@ def register():
     if request.method == "POST":
         user_name = request.form["name"]
         try:
+            email = request.form.get('email')
+            result = db.session.execute(db.select(User).where(User.email == email))
+            user = result.scalar()
+            if user:
+                flash("You've already signed up with that email, log in instead!")
+                return redirect(url_for('login'))
             register = User(
             name = user_name,
-            email = request.form["email"],
+            email = email,
             password = generate_password_hash(request.form["password"],method='pbkdf2:sha256',salt_length=8)
             )
             db.session.add(register)
             db.session.commit()
         except:
-            flash("Email already exists")
             return redirect(url_for("login"))
 
         login_user(register)
@@ -70,7 +75,7 @@ def login():
         user = result.scalar()
         if not user:
             flash("That email does not exist, please try again.")
-            return redirect(url_for('login'))
+            # return redirect(url_for('login'))
         elif not check_password_hash(user.password,password):
             flash("Incorrect Password!")
         else:
