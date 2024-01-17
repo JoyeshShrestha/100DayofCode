@@ -156,7 +156,11 @@ def logout():
 def get_all_posts():
     result = db.session.execute(db.select(BlogPost))
     posts = result.scalars().all()
-    return render_template("index.html", all_posts=posts,logged_in = current_user.is_authenticated,login_id = current_user.id,login_email = current_user.email)
+    
+    if current_user.is_authenticated:
+        return render_template("index.html", all_posts=posts,logged_in = current_user.is_authenticated,login_id = current_user.id)
+
+    return render_template("index.html", all_posts=posts,logged_in = current_user.is_authenticated)
 
 
 # TODO: Allow logged-in users to comment on posts
@@ -179,8 +183,10 @@ def show_post(post_id):
         db.session.commit()
        
     comment_list =db.session.execute(db.select(Comment).where(post_id ==post_id)).scalars()
+    if current_user.is_authenticated:
+        return render_template("post.html", post=requested_post, logged_in = current_user.is_authenticated, login_id = current_user.id, comment_form = comment,comments=comment_list,gravatar=gravatar,login_email = current_user.email)
 
-    return render_template("post.html", post=requested_post, logged_in = current_user.is_authenticated, login_id = current_user.id, comment_form = comment,comments=comment_list,gravatar=gravatar,login_email = current_user.email)
+    return render_template("post.html", post=requested_post, logged_in = current_user.is_authenticated, comment_form = comment,comments=comment_list,gravatar=gravatar)
 
 
 # TODO: Use a decorator so only an admin user can create a new post

@@ -38,46 +38,7 @@
       href="{{ url_for('static', filename='css/styles.css') }}"
       rel="stylesheet"
     />
-    <style>
-      .profile-container {
-        position: relative;
-      }
 
-      .profile-pic {
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-      }
-
-      .hover-bubble {
-        height: 200px;
-        width: 300px;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #4caf50;
-        color: white;
-        border-radius: 8px;
-        padding: 8px;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-        pointer-events: none;
-      }
-
-      .hover-text {
-        margin: 0;
-      }
-
-      .profile-pic:hover img {
-        transform: scale(1.1);
-      }
-
-      .profile-pic:hover .hover-bubble {
-        bottom: -50px; /* Adjust as needed to make the bubble pop out */
-        opacity: 1;
-      }
-    </style>
     {% endblock %}
   </head>
   <body>
@@ -144,22 +105,6 @@
                 href="{{ url_for('contact') }}"
                 >Contact</a
               >
-            </li>
-            <li class="nav-item">
-              {%if logged_in:%}
-              <a class="nav-link px-lg-3 py-3 py-lg-4 profile_pic" href="#"
-                ><div class="commenterImage">
-                  <div class="profile-container">
-                    <div class="profile-pic" id="profilePic">
-                      <img src="{{ login_email | gravatar }}" />
-                    </div>
-                    <div class="hover-bubble" id="hoverBubble">
-                      <div class="hover-text">{{login_email}}</div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-              {%endif%}
             </li>
           </ul>
         </div>
