@@ -11,3 +11,6 @@ pet = input()
 
 print("BAND NAME:")
 print(city+pet)
+
+ok ="Greening Indoors: Harnessing the Power of Indoor Plants for a Healthier and Happier Home"
+print(len(ok))
