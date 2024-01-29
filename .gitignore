@@ -3,4 +3,4 @@
 temp/
 .cache
 project.db
-*.csv
+/*.csv
