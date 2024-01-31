@@ -37,21 +37,25 @@ def calculator():
         if operation == "+":
             total = addition(first_no,second_no)
             print(f"{first_no} + {second_no} = {total}")
+            first_no = total
+
         elif operation =="-":
             total = substration(first_no,second_no)
             print(f"{first_no} - {second_no} = {total}")
+            first_no = total
 
         elif operation == "*":
             total = multiplication(first_no,second_no)
             print(f"{first_no} * {second_no} = {total}")
+            first_no = total
 
         elif operation == "/":
             total = division(first_no,second_no)
             print(f"{first_no} / {second_no} = {total}")
+            first_no = total
 
         else:    
             print("Error with operation")
-        first_no = total
         proceed = input(f"Type 'y' to continue calculating with {first_no}, or type 'n' to start a new calculation? ").lower()      
         if proceed =='n':
             calculator()
