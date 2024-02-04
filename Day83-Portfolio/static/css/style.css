@@ -65,7 +65,8 @@ h3 {
 
 /* Style paragraphs and basic text */
 p {
-  margin-bottom: 15px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
   font-weight: 400;
 }
 
@@ -107,12 +108,12 @@ a {
   
  
 .css-selector {
-  background: linear-gradient(270deg, #055e23, #39463c, #39463d);
+  background: linear-gradient(270deg, #001708, #0d2413,#39463c, #39463d);
   background-size: 600% 600%;
 color: white;
-  -webkit-animation: AnimationName 7s ease infinite;
-  -moz-animation: AnimationName 7s ease infinite;
-  animation: AnimationName 7s ease infinite;
+  -webkit-animation: AnimationName 17s ease infinite;
+  -moz-animation: AnimationName 17s ease infinite;
+  animation: AnimationName 17s ease infinite;
 }
 
 @-webkit-keyframes AnimationName {
@@ -131,5 +132,31 @@ color: white;
   100%{background-position:0% 50%}
 }
   
-.circular--portrait { position: relative; width: 200px; height: 200px; overflow: hidden; border-radius: 50%; } 
-.circular--portrait img { width: 100%; height: auto; }  
+/* .circular--portrait { position: relative; width: 230px; height: 230px; overflow: hidden; } 
+.circular--portrait img { width: 100%; height: auto; }   */
+.circular--portrait {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  overflow: hidden;
+  border: 8px solid #fff; /* White border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.circular--portrait img {
+  width: 100%;
+  height: auto;
+  /* border-radius: 50%; */
+}
+
+.circular--portrait:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+  transform: rotate(-5deg);
+  
+
+}
+
+.skills_icon{
+  width: auto;
+  height: 5rem;
+}
