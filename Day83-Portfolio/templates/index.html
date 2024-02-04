@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block title %}Joyesh{% endblock %} {% block content
+{% extends 'base.html' %} {% block title %}Joyesh's Portfolio{% endblock %} {% block content
 %}
 <div style="width: 100%; background-color: white;">
 <header class=" " style="color: rgb(230, 48, 48);width: 100%; background-color: white;">
@@ -84,8 +84,8 @@
   <div class="container ">
     <div class="container d-flex justify-content-center px-4 py-5" id="icon-grid">
   
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-5 py-5 align-items-center">
-      <h2 class="d-flex justify-content-start col-sm-12">Skills:</h2>
+      <div class="row  row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-5 py-5 align-items-center">
+      <h2 class="d-flex justify-content-start col-sm-12 hover-underline-animation">Skills:</h2>
         
         <div class="col d-flex align-items-center">
           <img src="static/img/python.svg" class="img skills_icon" alt="">
@@ -151,7 +151,95 @@
 </div>
 
 <!-- Projects -->
-<div class="css-selector">
-  <div class="container"></div>
+<div class="css-selector pt-3 px-3 pt-md-5 px-md-5">
+  <div class="container">
+    <h2 class="d-flex justify-content-start text-light col-sm-12  mt-4">Projects:</h2>
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-sm-12">
+    <div class="card">
+      <div class="front" style="background-image: url('static/img/p1.jpg');">
+        <p class="large">Jo-Blog</p>
+      </div>
+      <div class="back">
+        <div class="text-dark">
+          <div class="title">
+            <h2>Jo-Blog</h2>
+            <h3 class="release_date text-dark">Java</h3>
+          </div>
+          <div class="rating">
+            <label>Python Flask | SQLAlchemy | Gunicorn | Authentication | PostgreSQL</label>
+            <i class="fas fa-star star"></i>
+          </div>
+          <p class="review">review</p>
+          <p class="overview">Descriptioon</p>
+  
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-lg-6 col-md-12 col-sm-12">
+    <div class="card">
+      <div class="front" style="background-image: url('static/img/jo-blog.png');">
+        <h2 class="large">Jo-Blog</h2>
+        <h3>Python Flask | SQLAlchemy | Gunicorn | Authentication | PostgreSQL</h3>
+
+      </div>
+      <div class="back">
+        <div class="text-dark">
+          <div class="title">
+            <h2>Jo-Blog</h2>
+          </div>
+          <div class="rating">
+            <!-- <h3 style="color: black;">Python Flask | SQLAlchemy | Gunicorn | Authentication | PostgreSQL</h3> -->
+            
+          </div>
+          <p class="overview sub-heading sub">t's a dynamic space crafted with Flask, the robust Python web framework. Explore a collection of tech insights, projects, and creative endeavors that highlight my versatility and skills. With a secure login and logout system, powered by Flask, your privacy is prioritized. Engage in meaningful conversations by leaving comments on each project, fostering connections within the community. The interactive user experience, tailored with Flask's capabilities, ensures a seamless journey across various devices. Jo-Blog Portfolio is more than a website; it's a testament to the endless possibilities that Flask brings to the world of web development. Ready to explore? Login for the full experience or Explore projects without an account.</p>
+  
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
 </div>
 {% endblock %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammerjs/2.0.8/hammer.min.js"></script>
+<script>
+  let card = document.querySelector('.card');
+  let front = document.querySelector('.front');
+  let back = document.querySelector('.back');
+
+  let hammer = new Hammer(card);
+
+  hammer.on('pan', function(e) {
+    let rotateY = e.deltaX / card.clientWidth * 180;
+    front.style.transform = 'rotateY(' + rotateY + 'deg)';
+  });
+
+  hammer.on('panend', function(e) {
+    front.style.transform = 'rotateY(0deg)';
+  });
+
+  hammer.on('tap', function(e) {
+    front.style.transform = 'rotateY(180deg)';
+  });
+
+  hammer.on('touchend', function(e) {
+    front.style.transform = 'rotateY(0deg)';
+  });
+
+  // Simulate hover effect on desktop
+  if ('ontouchstart' in window === false) {
+    card.addEventListener('mouseover', function() {
+      front.style.transform = 'rotateY(180deg)';
+    });
+
+    card.addEventListener('mouseout', function() {
+      front.style.transform = 'rotateY(0deg)';
+    });
+  }
+</script>
