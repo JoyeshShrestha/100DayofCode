@@ -1,5 +1,7 @@
 html{
   margin: 0;
+    overflow-x: hidden;
+  
 }
 body, h1, h2, h3, p, ul, li {
   margin: 0;
@@ -190,4 +192,42 @@ color: white;
   .card {
     width: 100%;
  }
+}
+
+@keyframes levitate {
+  0%, 100% {
+    transform: translate(0, 0);
+    transform: translateX(0);
+  }
+  25% {
+    transform: translate(-20px, -20px); /* Move left and up */
+  }
+  40%{
+    /* transform: translateX(calc(100vw - 800px));  */
+    /* Move to the right side of the screen */
+
+  }
+  50% {
+    transform: translate(20px, 20px); /* Move right and down */
+
+  }
+  75% {
+    transform: translate(-10px, -10px); /* Move left and up slightly */
+  }
+}
+
+.levitating-image {
+  width: 300px;
+  height: auto;
+  position: absolute;
+  z-index: -1;
+  animation: levitate 12s linear infinite; /* Adjust the duration as needed */
+}
+
+.levitating-image:hover {
+  transform: scale(2);
+  -webkit-transform: scale(2); /* Safari and older versions of Chrome and Opera */
+  -moz-transform: scale(2); /* Firefox */
+  -ms-transform: scale(2); /* Internet Explorer */
+  -o-transform: scale(2); /* Opera */
 }
