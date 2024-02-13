@@ -5,8 +5,15 @@ from tkinter import filedialog
 import customtkinter
 from tkinter import font as tkFont
 import random
+import time
+
+all_time = []
+count = 0
 typed_word = []
 typing = ""
+mistakes = []
+
+
 def display_word():
     global words_to_display
     words_to_display=[]
@@ -20,19 +27,82 @@ def display_word():
     # Update the label text
     words.config(text=words_text)
 
+def check_time():
+    current_time = time.time()
+    try:
+        end_time = inital_time + 30
+        if current_time >= end_time:
+            show_score()
+        else:
+            root.after(1000, check_time)
+    except:
+        print("No initail")
+        
+        root.after(1000, check_time)
+
+def calculate_time(time):
+    all_time.append(all_time[-1] - inital_time)
+
+    print(f"times: {all_time}")
+
+def correct_word(input_text):
+    global mistakes
+    if words_to_display[count-1] == "\n":
+        if input_text != words_to_display[count]:
+            mistakes.append(input_text)
+    else:
+        if input_text != words_to_display[count-1]:
+            mistakes.append(input_text)    
+
+
+def show_score():
+    wpm = sum(all_time)/len(all_time)
+
+
+    mistakes_label = Label(root, text=len(mistakes), font=helv6,bg="#252525",fg="white")
+    mistakes_label.pack()
+    wpm_label = Label(root, text=f'WPM: {wpm}', font=helv6,bg="#252525",fg="white")
+    wpm_label.pack() 
+    print("ok enough done finished kaam!")
+
+
+
+
 
 def check_word(event):
     global typed_word
     global typing
+    global count   
+    global inital_time
+    # global end_time
+    
+    if count == 0:
+        
+        inital_time = time.time()
+        
+        count+=1
 
     # cursor_label.configure(text= user_input.get+ "|")
     
-    if event.keysym == 'space':
+    if event.keysym == 'space' :
+        
+
+        if count == 10:
+            count=1
+            display_word()
+        
+        time_after_space = time.time()
+        calculate_time(time_after_space)
+
         typed_word.append(user_input.get()) 
         print(words_to_display)
         typing = typing + " " +  typed_word[-1]
         cursor_label.configure(text= typing)
         input_text = user_input.get()
+
+        correct_word(input_text)
+        count+=1
+
         print("Space bar pressed! Input:", input_text)
         user_input.delete(0, tk.END)  # Clear the entry after getting the input
 
@@ -52,7 +122,9 @@ customtkinter.set_appearance_mode("dark")
 
 root = customtkinter.CTk()
 helv36 = tkFont.Font(family='Helvetica', size=30, weight='bold')
-helv69 = tkFont.Font(family='Helvetica', size=20, weight='normal')
+helv69 = tkFont.Font(family='Helvetica', size=10, weight='normal')
+helv6 = tkFont.Font(family='Helvetica', size=10, weight='normal')
+
 
 
 root.geometry("900x600")
@@ -60,7 +132,6 @@ root.geometry("900x600")
 root.title("TypeSpeed Testing - by Joyesh")
 
 root.config(padx=100, pady=50)
-
 
 
 
@@ -93,5 +164,8 @@ user_input.pack(pady= 30)
 cursor_label = Label(root, text=typed_word, font=helv69,bg="#252525",fg="white")
 cursor_label.pack() 
 
+# if time.time() == end_time:
+#     show_score()
+root.after(1000, check_time)
 
 root.mainloop()
