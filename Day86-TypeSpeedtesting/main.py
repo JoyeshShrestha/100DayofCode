@@ -12,7 +12,7 @@ count = 0
 typed_word = []
 typing = ""
 mistakes = []
-
+characters = 0
 
 def display_word():
     global words_to_display
@@ -41,7 +41,7 @@ def check_time():
         root.after(1000, check_time)
 
 def calculate_time(time):
-    all_time.append(all_time[-1] - inital_time)
+    all_time.append(time - inital_time)
 
     print(f"times: {all_time}")
 
@@ -56,7 +56,8 @@ def correct_word(input_text):
 
 
 def show_score():
-    wpm = sum(all_time)/len(all_time)
+    # wpm = sum(all_time)/len(all_time)
+    wpm = (characters/5)/0.5
 
 
     mistakes_label = Label(root, text=len(mistakes), font=helv6,bg="#252525",fg="white")
@@ -75,7 +76,8 @@ def check_word(event):
     global count   
     global inital_time
     # global end_time
-    
+    global characters
+    characters+=1
     if count == 0:
         
         inital_time = time.time()
