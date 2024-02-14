@@ -36,14 +36,14 @@ def check_time():
         else:
             root.after(1000, check_time)
     except:
-        print("No initail")
+        # print("No initail")
         
         root.after(1000, check_time)
 
 def calculate_time(time):
     all_time.append(time - inital_time)
 
-    print(f"times: {all_time}")
+    # print(f"times: {all_time}")
 
 def correct_word(input_text):
     global mistakes
@@ -58,13 +58,14 @@ def correct_word(input_text):
 def show_score():
     # wpm = sum(all_time)/len(all_time)
     wpm = (characters/5)/0.5
+    accuracy = (len(mistakes)/len(typed_word))*100
 
-
-    mistakes_label = Label(root, text=len(mistakes), font=helv6,bg="#252525",fg="white")
-    mistakes_label.pack()
-    wpm_label = Label(root, text=f'WPM: {wpm}', font=helv6,bg="#252525",fg="white")
-    wpm_label.pack() 
-    print("ok enough done finished kaam!")
+    mistakes_label = Label(root, text=f'Accuracy : {accuracy}%   WPM: {wpm}', font=helv6,bg="#252525",fg="white")
+    mistakes_label.pack(pady=5)
+    # wpm_label = Label(root, text=f'WPM: {wpm}', font=helv6,bg="#252525",fg="white")
+    # wpm_label.pack() 
+    user_input.configure(state='disabled')
+    # print("ok enough done finished kaam!")
 
 
 
@@ -97,7 +98,7 @@ def check_word(event):
         calculate_time(time_after_space)
 
         typed_word.append(user_input.get()) 
-        print(words_to_display)
+        # print(words_to_display)
         typing = typing + " " +  typed_word[-1]
         cursor_label.configure(text= typing)
         input_text = user_input.get()
@@ -105,7 +106,7 @@ def check_word(event):
         correct_word(input_text)
         count+=1
 
-        print("Space bar pressed! Input:", input_text)
+        # print("Space bar pressed! Input:", input_text)
         user_input.delete(0, tk.END)  # Clear the entry after getting the input
 
         # Move the cursor label to the end of the text
@@ -125,7 +126,7 @@ customtkinter.set_appearance_mode("dark")
 root = customtkinter.CTk()
 helv36 = tkFont.Font(family='Helvetica', size=30, weight='bold')
 helv69 = tkFont.Font(family='Helvetica', size=10, weight='normal')
-helv6 = tkFont.Font(family='Helvetica', size=10, weight='normal')
+helv6 = tkFont.Font(family='Helvetica', size=20, weight='bold')
 
 
 
