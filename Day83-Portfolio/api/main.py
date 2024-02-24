@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, request,url_for
 import smtplib
 import os
+import datetime
 # from dotenv import load_dotenv
 # load_dotenv()
 
@@ -34,6 +35,7 @@ def send_email(email,message):
 
 @app.route('/',methods=["GET","POST"])
 def hello_world():
+    current_year = datetime.datetime.now().year
     if request.method == 'POST':
         email = request.form['email']
         message = request.form['message']
@@ -41,7 +43,7 @@ def hello_world():
             return f"<h1>Successfully sent</h1><a href='{url_for('hello_world')}'>Go back</a>"
         else:
             return f"<h1>Email Failed</h1><a href='{url_for('hello_world')}'>Go back</a>"
-    return render_template("index.html")
+    return render_template("index.html",year = current_year)
 
 
 @app.errorhandler(404)
